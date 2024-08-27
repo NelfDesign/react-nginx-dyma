@@ -1,0 +1,22 @@
+services:
+  client:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+        source: ./
+        target: /home/node
+      - type: volume
+        target: /home/node/node_modules
+  test:
+    build: .
+    volumes:
+      - type: bind
+        source: ./
+        target: /home/node
+      - type: volume
+        target: /home/node/node_modules
+    command: ["npm", "run", "test"]
+    stdin_open: true
+    tty: true
